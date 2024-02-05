@@ -6,19 +6,20 @@ pipeline {
     }
     // environment { 
     //     packageVersion = ''
-    //     nexusURL = '172.31.8.127:8081'
-    }
+    //     nexusURL = '172.31.5.95:8081'
+    // }
     options {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
+        ansiColor('xterm')
     }
     parameters {
-        string(name: 'version', defaultValue: '1.0.0', description: 'What is the artifact version?')
+        string(name: 'version', defaultValue: '', description: 'What is the artifact version?')
         string(name: 'environment', defaultValue: 'dev', description: 'What is environment?')
     }
     // build
     stages {
-        stage('print version') {
+        stage('Print version') {
             steps {
                 sh """
                     echo "version: ${params.version}"
@@ -26,15 +27,34 @@ pipeline {
                 """
             }
         }
-        stages {
-        stage('print version') {
-            steps {
-                sh """
-                    echo "version: ${params.version}"
-                    echo "environment: ${params.environment}"
-                """
-            }
-        }
+
+        // stage('Init') {
+        //     steps {
+        //         sh """
+        //             cd terraform
+        //             terraform init --backend-config=${params.environment}/backend.tf -reconfigure
+        //         """
+        //     }
+        // }
+
+        // stage('Plan') {
+        //     steps {
+        //         sh """
+        //             cd terraform
+        //             terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
+        //         """
+        //     }
+        // }
+
+        // stage('Apply') {
+        //     steps {
+        //         sh """
+        //             cd terraform
+        //             terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+        //         """
+        //     }
+        // }
+        
     }
     // post build
     post { 
