@@ -22,3 +22,7 @@ variable "environment" {
 variable "zone_name" {
   default = "kubernete.online"
 }
+
+variable "app_version" {
+  
+}
