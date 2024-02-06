@@ -6,7 +6,7 @@ pipeline {
     }
     // environment { 
     //     packageVersion = ''
-    //     nexusURL = '172.31.5.95:8081'
+    //     nexusURL = '172.31.8.127:8081'
     // }
     options {
         timeout(time: 1, unit: 'HOURS')
@@ -28,14 +28,14 @@ pipeline {
             }
         }
 
-        // stage('Init') {
-        //     steps {
-        //         sh """
-        //             cd terraform
-        //             terraform init --backend-config=${params.environment}/backend.tf -reconfigure
-        //         """
-        //     }
-        // }
+        stage('Init') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform init --backend-config=${params.environment}/backend.tf -reconfigure
+                """
+            }
+        }
 
         // stage('Plan') {
         //     steps {

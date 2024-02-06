@@ -23,6 +23,6 @@ variable "zone_name" {
   default = "kubernete.online"
 }
 
-variable "app_version" {
+variable app_version {
   
 }
