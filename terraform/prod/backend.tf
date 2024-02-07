@@ -1,4 +1,4 @@
 bucket = "aws-state-prod"
-key    = "multienv-prod"
+key    = "catalogue"
 region = "us-east-1"
 dynamodb_table = "aws-locking-prod"
