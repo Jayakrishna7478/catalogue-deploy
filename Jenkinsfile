@@ -4,14 +4,14 @@ pipeline {
             label 'AGENT-1'
         }
     }
-    // environment { 
-    //     packageVersion = ''
-    //     nexusURL = '172.31.8.127:8081'
-    // }
+    environment { 
+        packageVersion = ''
+        nexusURL = '172.31.30.150:8081'
+    }
     options {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
-        //ansiColor('xterm')
+        ansiColor('xterm')
     }
     parameters {
         string(name: 'version', defaultValue: '', description: 'What is the artifact version?')
