@@ -8,7 +8,7 @@ module "catalogue" {
   environment = var.environment
   common_tags = var.common_tags
   tags = var.tags
-  zone_name = var.zone_name
+  #zone_name = var.zone_name
   app_alb_listener_arn = data.aws_ssm_parameter.app_alb_listener_arn.value
   rule_priority = 20
   app_version = var.app_version
