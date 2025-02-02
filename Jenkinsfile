@@ -4,10 +4,10 @@ pipeline {
             label 'AGENT-1'
         }
     }
-    environment { 
-        packageVersion = ''
-        nexusURL = '172.31.84.78:8081'
-    }
+    // environment { 
+    //     packageVersion = ''
+    //     nexusURL = '172.31.84.78:8081'
+    // }
     options {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
@@ -30,56 +30,56 @@ pipeline {
             }
         }
 
-        stage('Init') {
-            steps {
-                sh """
-                    cd terraform
-                    terraform init --backend-config=${params.environment}/backend.tf -reconfigure
-                """
-            }
-        }
+    //     stage('Init') {
+    //         steps {
+    //             sh """
+    //                 cd terraform
+    //                 terraform init --backend-config=${params.environment}/backend.tf -reconfigure
+    //             """
+    //         }
+    //     }
 
-        stage('Plan') {
-            when{
-                expression{
-                    params.Create
-                }
-            }
-            steps {
-                sh """
-                    cd terraform
-                    terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
-                """
-            }
-        }
+    //     stage('Plan') {
+    //         when{
+    //             expression{
+    //                 params.Create
+    //             }
+    //         }
+    //         steps {
+    //             sh """
+    //                 cd terraform
+    //                 terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
+    //             """
+    //         }
+    //     }
 
-        stage('Apply') {
-            when{
-                expression{
-                    params.Create
-                }
-            }
-            steps {
-                sh """
-                    cd terraform
-                    terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
-                """
-            }
-        }
-          stage('Destroy') {
-            when{
-                expression{
-                    params.Destroy
-                }
-            }
-            steps {
-                sh """
-                    cd terraform
-                    terraform destroy -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
-                """
-            }
-        }
-    }
+    //     stage('Apply') {
+    //         when{
+    //             expression{
+    //                 params.Create
+    //             }
+    //         }
+    //         steps {
+    //             sh """
+    //                 cd terraform
+    //                 terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+    //             """
+    //         }
+    //     }
+    //       stage('Destroy') {
+    //         when{
+    //             expression{
+    //                 params.Destroy
+    //             }
+    //         }
+    //         steps {
+    //             sh """
+    //                 cd terraform
+    //                 terraform destroy -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+    //             """
+    //         }
+    //     }
+     }
     // post build
     post { 
         always { 
