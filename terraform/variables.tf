@@ -19,9 +19,9 @@ variable "environment" {
   default = "dev"
 }
 
-# variable "zone_name" {
-#   default = "kubernete.online"
-# }
+variable "zone_name" {
+  default = "jayakrishna.online"
+}
 
 variable "app_version" {
   
